@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Courage to be Disliked</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.3);
+        }
+
+        .hero-content {
+            z-index: 2;
+            max-width: 800px;
+            padding: 2rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 300;
+            letter-spacing: -1px;
+        }
+
+        .hero .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .hero .author {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.8;
+        }
+
+        .cta-button {
+            background: rgba(255,255,255,0.2);
+            border: 2px solid white;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background: white;
+            color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .concept-grid {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+            font-weight: 300;
+        }
+
+        .concepts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .concept-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 5px solid #667eea;
+        }
+
+        .concept-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .concept-card h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .concept-card p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .dialogue-section {
+            background: linear-gradient(45deg, #f093fb 0%, #f5576c 100%);
+            padding: 80px 20px;
+            color: white;
+            text-align: center;
+        }
+
+        .dialogue-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .dialogue-box {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            backdrop-filter: blur(10px);
+            animation: slideIn 0.8s ease-out;
+        }
+
+        .speaker {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #ffd700;
+        }
+
+        .quote {
+            font-style: italic;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .principles {
+            padding: 80px 20px;
+            background: #f8f9fa;
+        }
+
+        .principles-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .principle-item {
+            display: flex;
+            align-items: center;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .principle-item:hover {
+            transform: translateX(10px);
+        }
+
+        .principle-number {
+            background: #667eea;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .principle-content h4 {
+            color: #333;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .principle-content p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .interactive-section {
+            padding: 80px 20px;
+            background: #667eea;
+            color: white;
+            text-align: center;
+        }
+
+        .reflection-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            max-width: 600px;
+            margin: 2rem auto;
+            backdrop-filter: blur(10px);
+        }
+
+        .reflection-button {
+            background: rgba(255,255,255,0.2);
+            border: 2px solid white;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+        }
+
+        .reflection-button:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        .footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .footer p {
+            opacity: 0.8;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .concepts {
+                grid-template-columns: 1fr;
+            }
+            
+            .principle-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .principle-number {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>The Courage to be Disliked</h1>
+            <p class="subtitle">How to Free Yourself, Change Your Life, and Achieve Real Happiness</p>
+            <p class="author">by Ichiro Kishimi & Fumitake Koga</p>
+            <a href="#concepts" class="cta-button">Discover the Philosophy</a>
+        </div>
+    </section>
+
+    <section id="concepts" class="concept-grid">
+        <h2 class="section-title">Core Concepts</h2>
+        <div class="concepts">
+            <div class="concept-card">
+                <h3>🎯 Separation of Tasks</h3>
+                <p>Learn to distinguish between what is your task and what belongs to others. You cannot control other people's thoughts, feelings, or actions - only your own responses and choices.</p>
+            </div>
+            <div class="concept-card">
+                <h3>🚫 Reject the Need for Approval</h3>
+                <p>Living your life seeking approval from others is not freedom. True happiness comes from having the courage to be disliked while staying true to your authentic self.</p>
+            </div>
+            <div class="concept-card">
+                <h3>🎭 All Problems are Interpersonal</h3>
+                <p>According to Adlerian psychology, all troubles stem from interpersonal relationships. Understanding this helps us address the root of our difficulties.</p>
+            </div>
+            <div class="concept-card">
+                <h3>⚡ Live in the Present</h3>
+                <p>Don't be trapped by your past or anxious about your future. Life happens in the "here and now" - focus on what you can do in this moment.</p>
+            </div>
+            <div class="concept-card">
+                <h3>🎪 Life is Not a Competition</h3>
+                <p>When you view life as competition, you see others as enemies. Instead, see life as cooperation and contribution to the common good.</p>
+            </div>
+            <div class="concept-card">
+                <h3>🌟 You Can Change</h3>
+                <p>People can change at any moment. The courage to change comes from accepting that happiness is not about what happens to you, but how you choose to respond.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="dialogue-section">
+        <div class="dialogue-container">
+            <h2 class="section-title">Philosophical Dialogue</h2>
+            <div class="dialogue-box">
+                <div class="speaker">Philosopher:</div>
+                <div class="quote">"No experience is in itself a cause of our success or failure. We do not suffer from the shock of our experiences—the so-called trauma—but instead we make out of them whatever suits our purposes."</div>
+            </div>
+            <div class="dialogue-box">
+                <div class="speaker">Young Man:</div>
+                <div class="quote">"Are you saying that people can change?"</div>
+            </div>
+            <div class="dialogue-box">
+                <div class="speaker">Philosopher:</div>
+                <div class="quote">"People can change. And you, too, can change. But you are the only one who can decide whether or not to change."</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="principles">
+        <div class="principles-container">
+            <h2 class="section-title">Key Principles</h2>
+            <div class="principle-item">
+                <div class="principle-number">1</div>
+                <div class="principle-content">
+                    <h4>Deny Trauma</h4>
+                    <p>Your past does not determine your present. What matters is not what happened to you, but how you interpret and use those experiences.</p>
+                </div>
+            </div>
+            <div class="principle-item">
+                <div class="principle-number">2</div>
+                <div class="principle-content">
+                    <h4>Embrace Discomfort</h4>
+                    <p>The courage to be happy includes the courage to be disliked. You cannot live freely if you are constantly seeking approval from others.</p>
+                </div>
+            </div>
+            <div class="principle-item">
+                <div class="principle-number">3</div>
+                <div class="principle-content">
+                    <h4>Focus on Contribution</h4>
+                    <p>True happiness comes from contributing to others and to the common good, not from competing or comparing yourself to others.</p>
+                </div>
+            </div>
+            <div class="principle-item">
+                <div class="principle-number">4</div>
+                <div class="principle-content">
+                    <h4>Choose Your Response</h4>
+                    <p>You always have the freedom to choose how you respond to any situation. This choice is the foundation of your happiness and freedom.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="interactive-section">
+        <h2 class="section-title">Reflection Questions</h2>
+        <div class="reflection-card">
+            <p style="margin-bottom: 1.5rem;">Click the questions below to reflect on how these concepts apply to your life:</p>
+            <button class="reflection-button" onclick="showReflection(1)">What tasks am I trying to control that aren't mine?</button>
+            <button class="reflection-button" onclick="showReflection(2)">How is seeking approval limiting my freedom?</button>
+            <button class="reflection-button" onclick="showReflection(3)">What would I do if I had the courage to be disliked?</button>
+            <button class="reflection-button" onclick="showReflection(4)">How can I contribute to others today?</button>
+            <div id="reflection-text" style="margin-top: 2rem; min-height: 60px; font-style: italic;"></div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2025 The Courage to be Disliked - A Journey to Individual Psychology</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">Inspired by the transformative work of Ichiro Kishimi & Fumitake Koga</p>
+        
+        <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.2);">
+            <p style="font-weight: bold; margin-bottom: 0.5rem;">Built by Victory Hour Multimedia Inc.</p>
+            <p style="margin-bottom: 0.5rem;">
+                🌐 <a href="http://www.victoryhourmedia.com" style="color: #ffd700; text-decoration: none;">www.victoryhourmedia.com</a> | 
+                ✉️ <a href="mailto:info@victoryhourmedia.com" style="color: #ffd700; text-decoration: none;">info@victoryhourmedia.com</a>
+            </p>
+            <p style="font-style: italic; font-size: 0.9rem; opacity: 0.9;">We build brands that lead. From strategy to design to digital presence—your growth is our mission.</p>
+        </div>
+    </footer>
+
+    <script>
+        function showReflection(num) {
+            const reflections = {
+                1: "Take a moment to identify the tasks you're trying to control that belong to others. Remember: you can only control your own thoughts, feelings, and actions.",
+                2: "Consider how the need for approval might be holding you back from authentic self-expression. What would change if you stopped seeking others' validation?",
+                3: "Imagine living without the fear of being disliked. What decisions would you make differently? What authentic parts of yourself would you express?",
+                4: "Think about ways you can contribute to others' well-being today, however small. True fulfillment comes from giving, not taking."
+            };
+            
+            document.getElementById('reflection-text').textContent = reflections[num];
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe concept cards
+        document.querySelectorAll('.concept-card, .principle-item').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
